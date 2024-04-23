@@ -1,6 +1,8 @@
 from requests import exceptions, get, post
 from misc_classes import * #Imports classes like ThumnailConfig n shit
-
+from logging import warning, info
+global loggedInAs
+loggedInAs = None #The Client object that is currently logged in
     
 
 def makeRequest(requestType:str, endpoint:str,prefix:str="www", arguments:list=[], headers:dict={}, data:dict={}, proxy:bool=False):
@@ -45,6 +47,21 @@ class User:
     verifiedBadge = True,
     created = ""
     usernameHistory = []
+    def send_message(self, subject:str, body:str):
+        """Sends one of the older email style messages to the user using the currently logged in credentials"""
+        if loggedInAs != None:
+            print(loggedInAs.token)
+            req = makeRequest("POST", "v1/messages/send", "privatemessages", headers={'Cookie': f".ROBLOSECURITY={loggedInAs.token}"}, data={
+                'subject': subject,
+                'body': body,
+                'recipientid': self.id
+            })
+            if req.status_code == 200:
+                return
+            else:
+                raise Exception(f"Roblox returned {req.status_code}: {req.json()}")
+        else:
+            raise Exception("You are not logged in with a ROBLOSECURITY token!")
 
     def get_avatar_headshot(self, size:ThumbnailSize=ThumbnailSize.x420, format:ImageFormat=ImageFormat.png, isCircular:bool=False):
         """Gets the url for the avatar headshot for the user
@@ -80,7 +97,28 @@ class User:
         else:
             raise Exception(f"Roblox returned {req.status_code}")
 
-    
+class Client(User):
+    """The Roblox account you're logged in to \nROBLOSECURITY: The account's ROBLOSECURITY token, including the warning"""
+    def __init__(self, ROBLOSECURITY:str):
+        self.token = ROBLOSECURITY
+        req = makeRequest("GET", "v1/users/authenticated", "users", headers={'Cookie': f".ROBLOSECURITY={self.token}", 'accept':'application/json'})
+        if req.status_code == 200:
+            self.id = req.json()['id']
+            self.name = req.json()['name']
+            self.displayName = req.json()['displayName']
+
+            req2 = makeRequest("GET", f"v1/users/{str(req.json()['id'])}","users")
+            if req2.status_code == 200:
+                resJson = req2.json()
+                self.description = resJson['description']
+                self.banned = resJson['isBanned'],
+                self.verifiedBadge = resJson['hasVerifiedBadge']
+                self.created = resJson['created']
+            global loggedInAs
+            loggedInAs = self
+            print(f"Logged in using ROBLOSECURITY cookie")
+        elif req.status_code == 401:
+            raise Exception("The token you provided is invalid!")
 
 def getUser(userId:int):
     """Returns a **user** object with all of the account's public information"""
@@ -95,6 +133,13 @@ def getUser(userId:int):
         user.banned = resJson['isBanned'],
         user.verifiedBadge = resJson['hasVerifiedBadge']
         user.created = resJson['created']
+
+        req2 = makeRequest("GET", f"v1/users/{str(userId)}/username-history","users", ['limit=100', 'sortOrder=Asc'])
+        if req2.status_code == 200:
+            user.usernameHistory = []
+            for x in req2.json()['data']:
+                user.usernameHistory.append(x['name'])
+            
         return user
     elif req.status_code == 404:
         raise Exception("Userid is not valid")
