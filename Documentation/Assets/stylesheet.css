@@ -1,0 +1,113 @@
+:root{
+    --Background: #080a18;
+    --Primary: #333;
+    --Secondary: #2e2b3b;
+    --Tertiary: #333;
+    --Highlight: #6bc4df;
+    --FontColorPrimary: #fff;
+    --FontColorSecondary: #d8d8d8;
+    --LinkColor: #7897ee;
+}
+
+body{
+    background-color: var(--Background);
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1,h2{
+    color: var(--FontColorPrimary);
+}
+h3,p{
+    color: var(--FontColorSecondary);
+}
+header{
+    background-color: var(--Secondary);
+    position: fixed;
+    left: 0;
+    top:0;
+    height: 3em;
+    width: 100%;
+    padding-left: 7px;
+    border-bottom: var(--Highlight) 1px solid;
+}
+.content{
+    margin-top: 4em;
+    width: calc(90% - 10em);
+    margin-left: 11em;
+}
+ul{
+    color: var(--FontColorSecondary);
+}
+.headerbtn{
+    display: inline-block;
+    color: var(--FontColorPrimary);
+    font-weight: 800;
+    text-decoration: none;
+    height: 100%;
+    transform: translateY(30%);
+    cursor: pointer;
+}
+#searchinput{
+    height: 2.5em;
+    position: absolute;
+    right: 0px;
+    top:-0.5em;
+    background-color: var(--Tertiary);
+    border-radius: 6px;
+}
+.sidebutton{
+    display: block;
+    color: var(--FontColorPrimary);
+    padding-left: 5px;
+    padding-top: 5px;
+    margin-bottom: 0px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.sidebutton h3{
+    margin-bottom: 2px;
+    margin-top: 3px;
+}
+.sidebar{
+    background-color: var(--Secondary);
+    position: fixed;
+    top: calc(3em + 1px);
+    left: 0;
+    width: 10em;
+    height: calc(100% - 3em + 2px);
+    padding-left: 2px;
+    padding-top: 2px;
+    border-right: solid var(--Highlight) 1px;
+}
+.attrlist{
+    list-style: none;
+    padding-left: 10px;
+}
+code{
+    background-color: var(--Primary);
+    padding: 2px;
+    border-radius: 4px;
+    color: #f8e960;
+}
+.authwarning{
+    color: #cc0000;
+    font-weight: 600;
+    background-color: var(--Primary);
+    padding: 2px;
+    border-radius: 4px;
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+/* Styles */
+    .sidebar{
+        display: none;
+
+    }
+    .content{
+        width: calc(90%);
+        margin-top: 4em;
+        margin: auto;
+
+    }
+}

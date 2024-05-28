@@ -3,7 +3,7 @@ from misc_classes import * #Imports classes like ThumnailConfig n shit
 from logging import warning, info
 global loggedInAs
 loggedInAs = None #The Client object that is currently logged in
-    
+useproxy = True
 
 def makeRequest(requestType:str, endpoint:str,prefix:str="www", arguments:list=[], headers:dict={}, data:dict={}, proxy:bool=False):
     """An internal function that makes a request to the provided endpoint
@@ -20,7 +20,7 @@ prefix (string): the subdomain to request to
     if requestType != "POST" and requestType != "GET":
         raise Exception("Invalid request type. Valid requests are: POST, GET (case sensitive)")
     domain = "roblox.com"
-    if proxy == True:
+    if proxy == True or useproxy == True:
         domain = "roproxy.com"
     url = f"https://{prefix}.{domain}/{endpoint}"
     for i,x in enumerate(arguments):
@@ -143,3 +143,14 @@ def getUser(userId:int):
         return user
     elif req.status_code == 404:
         raise Exception("Userid is not valid")
+    
+class Group:
+    """The container for a group"""
+    id = None #Int
+    name = None #string
+    owner = None #Class User()
+    iconUrl = None #string
+    shout = None #dict, {"poster": user, "content": string, "time": datetime.datetime}
+
+def getGroup(groupId:int):
+    pass
