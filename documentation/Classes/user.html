@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>User - RBLX-PY docs</title>
+        <link rel="stylesheet" type="text/css" href="../Assets/stylesheet.css">
+        <link rel="stylesheet" type="text/css" href="../Assets/icastDARKNESS.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="../Assets/SidebarLoader.js"></script>
+    </head>
+    <body>
+        <header>
+            <a class="headerbtn" href="../about.html">Documentation</a>
+            <input class="headerbtn" id="searchinput" style="float: right; margin-right: 14px;" placeholder="Search.." type="text">
+        </header>
+        <div class="sidebar" id="sidebar">
+            <!--To be filled in with javascript code-->
+        </div>
+        <div class="content">
+            <h3 style="margin-bottom: 0;">class</h3>
+            <h1 style="margin-top: 0;">User</h1>
+            <p>A container for a Roblox account, contains all public information</p>
+            <h3>Attributes</h3>
+            <ul class="attrlist">
+                <li><code>int</code> id</li>
+                <li><code>str</code> name</li>
+                <li><code>str</code> displayName</li>
+                <li><code>str</code> description</li>
+                <li><code>bool</code> banned</li>
+                <li><code>bool</code> verifiedBadge</li>
+                <li><code>datetime</code> created</li>
+                <li><code>list</code> usernameHistory</li>
+            </ul>
+            <h3>Methods</h3>
+            <ul class="attrlist">
+                <li>sendMessage(subject:<code>str</code>, body:<code>str</code>)</li>
+                <li>get_avatar_headshot(size<code>ThumbnailSize</code>, format:<code>ImageFormat</code>, isCircular:<code>bool</code>)</li>
+                <li>get_avatar_bust(size<code>ThumbnailSize</code>, format:<code>ImageFormat</code>, isCircular:<code>bool</code>)</li>
+                <li>get_avatar(size<code>ThumbnailSize</code>, format:<code>ImageFormat</code>, isCircular:<code>bool</code>)</li>
+            </ul>
+            <hr>
+            <h2>Attributes</h2>
+            <hr>
+            <h3>Attribute: id</h3>
+            <code>int</code>
+            <p>The userId associated with the User</p>
+            <hr>
+            <h3>Attribute: name</h3>
+            <code>str</code>
+            <p>The username of the account</p>
+            <hr>
+            <h3>Attribute: displayName</h3>
+            <code>str</code>
+            <p>The displayName of the user</p>
+            <hr>
+            <h3>Attribute: description</h3>
+            <code>str</code>
+            <p>The user's "about me" description</p>
+            <hr>
+            <h3>Attribute: banned</h3>
+            <code>bool</code>
+            <p>Is the user banned?</p>
+            <hr>
+            <h3>Attribute: verifiedBadge</h3>
+            <code>bool</code>
+            <p>Does the user have the roblox admin badge?</p>
+            <hr>
+            <h3>Attribute: created</h3>
+            <code>datetime</code>
+            <p>When the account was created. Translates the ISO 8601 format that Roblox provides into a Datetime object </p>
+            <hr>
+            <h3>Attribute: usernameHistory</h3>
+            <code>list</code>
+            <p>All of the past usernames of the account</p>
+            <hr>
+            <h2>Methods</h2>
+            <hr>
+            <h3>Method: sendMessage</h3>
+            <code>subject: str</code> <code>body: str</code>
+            <br>
+            <code>returns: bool</code>
+            <p class="authwarning">You need to be authenticated to run this</p>
+            <p>sendMessage sends one of the older "email" style message to the user from the currently authenticated account.
+                <br><br><b>subject:</b> The subject of the message
+                <br><b>body:</b> The body content of the message
+            </p>
+            <script src="https://gist.github.com/Lunar-Orbit1/0551cde3ce42299dd0dfe9197a537426.js"></script>
+            <hr>
+            <h3>Method: get_avatar_headshot</h3>
+            <code>size: ThumbnailSize=ThumbnailSize.420x420</code> <code>format: ImageFormat=ImageFormat.png</code> <code>isCircular: bool=False</code>
+            <p>Fetches the user's avatar headshot. Returns a url which points to the image
+                <br><br><b>size:</b> The ThumbnailSize of the image (default ThumbnailSize.420x420)
+                <br><b>format:</b> The format of the image (default ImageFormat.png)
+                <br><b>isCircular:</b> Is the returned image round? (default False)
+            </p>
+            <hr>
+            <h3>Method: get_avatar_bust</h3>
+            <code>size: ThumbnailSize=ThumbnailSize.420x420</code> <code>format: ImageFormat=ImageFormat.png</code> <code>isCircular: bool=False</code>
+            <p>Fetches the user's avatar bust (chest+head) Returns a url which points to the image
+                <br><br><b>size:</b> The ThumbnailSize of the image (default ThumbnailSize.420x420)
+                <br><b>format:</b> The format of the image (default ImageFormat.png)
+                <br><b>isCircular:</b> Is the returned image round? (default False)
+            </p>
+            <hr>
+            <h3>Method: get_avatar</h3>
+            <code>size: ThumbnailSize=ThumbnailSize.420x420</code> <code>format: ImageFormat=ImageFormat.png</code> <code>isCircular: bool=False</code>
+            <p>Fetches the user's full avatar image. Returns a url which points to the image
+                <br><br><b>size:</b> The ThumbnailSize of the image (default ThumbnailSize.420x420)
+                <br><b>format:</b> The format of the image (default ImageFormat.png)
+                <br><b>isCircular:</b> Is the returned image round? (default False)
+            </p>
+            <hr>
+        </div>
+    </body>
+</html>
